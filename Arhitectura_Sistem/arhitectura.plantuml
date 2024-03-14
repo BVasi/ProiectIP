@@ -1,0 +1,17 @@
+@startuml ArhitecturaSistem
+
+actor "Operator Web" as WebOperator
+actor "Operator Telefon" as MobileOperator
+cloud "Server Dedicat în Cloud" as Server
+database "Baza de Date MySQL" as Database
+
+WebOperator --> "WebApp" : Interactiune utilizator
+MobileOperator --> "MobileApp" : Interactiune utilizator
+
+"WebApp" <--> Server : Cereri/Raspunsuri RESTful
+"MobileApp" <--> Server : Cereri/Raspunsuri RESTful
+"ESP32" <--> Server : Cereri/Raspunsuri RESTful
+
+Server --> Database : Actualizari Task-uri
+
+@enduml

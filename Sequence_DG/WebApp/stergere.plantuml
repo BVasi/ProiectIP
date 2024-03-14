@@ -1,0 +1,16 @@
+@startuml Stergere_Pacient
+
+database DB
+participant WebApp
+
+WebApp -> WebApp: Citire cnp dupa care se cauta pacientul
+WebApp -> DB: cerere stergere pacient
+
+alt Pacientul exista in baza de date
+    DB -> DB: Sterge pacientul
+    DB --> WebApp: Confirmare stergere
+else Pacientul nu exista in baza de date
+    DB --> WebApp: Informare ca pacientul nu exista
+end
+
+@enduml

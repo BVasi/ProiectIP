@@ -1,0 +1,23 @@
+@startuml signup
+
+database DB
+participant CloudServer
+participant MobileApp
+
+MobileApp -> MobileApp: citire date de inregistrare
+MobileApp -> CloudServer: cerere creare cont
+CloudServer -> CloudServer: generare parola cont
+CloudServer -> DB: cerere adaugare cont
+DB -> DB: incercare adaugare cont
+
+alt operatie efectuata cu success
+    DB --> CloudServer: ok
+    CloudServer --> MobileApp: cont creat cu succes (verificati emailul)
+    MobileApp -> MobileApp: mesaj catre user
+else operatie esuata
+    DB --> CloudServer: nok
+    CloudServer --> MobileApp: eroare la crearea contului
+    MobileApp -> MobileApp: mesaj catre user
+end
+
+@enduml

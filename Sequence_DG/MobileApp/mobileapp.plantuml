@@ -1,0 +1,32 @@
+@startuml ESP32DG
+
+database DB
+participant MobileApp
+
+==Login==
+MobileApp -> MobileApp: citire date {User:[username, parola]}
+MobileApp -> DB: trimitere {User:[username, parola]}
+DB -> DB: verificare date
+alt user gasit
+    DB --> MobileApp: login successfully
+else
+    DB --> MobileApp: login failed
+end
+
+==Introducere date==
+MobileApp -> MobileApp:  citire date{tensiune arteriala,greutate,temperatura,glicemie}
+MobileApp -> MobileApp : verificare date
+opt parametrii_fiziologici_anormali
+    MobileApp -> DB: alarma
+end
+MobileApp -> DB: trimitere date introduse
+
+==Vizualizare fisa medicala==
+MobileApp -> DB: cerere fisa medicala
+DB --> MobileApp: trimitere informatii din fisa medicala
+
+==Vizualizare lista pacienti==
+MobileApp -> DB: cerere lista pacienti
+DB --> MobileApp: trimitere lista pacienti
+
+@enduml

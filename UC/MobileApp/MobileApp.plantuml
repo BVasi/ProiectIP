@@ -1,0 +1,30 @@
+@startuml MobileAppUCs
+
+left to right direction
+
+actor "MobileApp" as MobileApp
+actor "Pacient" as Pacient
+actor "Ingrijitor" as Ingrijitor
+
+rectangle "Aplicatie Mobila" {
+    MobileApp -> (Detect and Raise Alarm)
+    MobileApp -> (Trimitere date)
+
+    Pacient -left-> (Login)
+    Pacient -left-> (Reset password)
+    Pacient -left-> (Introducere valori citite)
+    Pacient -left-> (Vizualizare fisa medicala)
+    Pacient -left-> (Programare)
+    Pacient -left-> (Vizualizare grafice)
+
+    Ingrijitor -right-> (Login)
+    Ingrijitor -right-> (Reset password)
+    Ingrijitor -right-> (Vizualizare lista pacienti)
+    Ingrijitor -right-> (Introducere valori citite)
+    Ingrijitor -right-> (Vizualizare fisa medicala)
+    Ingrijitor -right-> (Programare)
+    Ingrijitor -right-> (Vizualizare grafice)
+
+}
+
+@enduml

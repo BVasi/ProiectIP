@@ -1,0 +1,19 @@
+@startuml ESP32UCs
+
+left to right direction
+
+actor "ESP32" as ESP32
+actor "Web Application" as WebApp
+
+rectangle "ESP32 - Cloud Interaction" {
+    ESP32 --> (Connect to Cloud Server)
+    ESP32 --> (Connection Failed)
+    ESP32 --> (Send data to Cloud Server)
+    ESP32 --> (Change sampling frequency)
+    ESP32 --> (Detect Alarm)
+    (Detect Alarm) --> (Report Alarm)
+    WebApp --> (Send command to ESP32)
+    (Send command to ESP32) --> ESP32 : Change Sampling Frequency
+}
+
+@enduml

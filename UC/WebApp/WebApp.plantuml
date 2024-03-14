@@ -1,0 +1,38 @@
+@startuml ESP32UCs
+
+left to right direction
+
+actor "Web Application" as WebApp
+actor "Medic" as Medic
+actor "Ingrijitor" as Ingrijitor
+actor "Supraveghetor" as Supraveghetor
+actor "Pacient" as Pacient
+actor "Administrator" as Administrator
+
+rectangle "Web App" {
+    WebApp --> (Schimbare frecventa esantionare)
+    User --> (Login)
+
+    Medic --> (Stabilire scenarii alarma)
+    Medic --> (Adaugare pacienti)
+    Medic --> (Vizualizare date pacient)
+    Medic --> (Modificare date pacient)
+    Medic --> (Stergere pacient)
+    Medic --> (Intocmire rapoarte)
+    Medic --> (Creare recomandari)
+    Medic --> (Adaugare tratament)
+
+    Supraveghetor --> (Vizualizare date pacient)
+    Supraveghetor --> (Rezolvare alarme)
+
+    Ingrijitor --> (Introducere date)
+    Ingrijitor --> (Vizualizare date pacient)
+    Ingrijitor --> (Rezolvare tratament)
+
+    Pacient --> (Vizualizare fisa)
+    Pacient --> (Introducere date)
+
+    Administrator --> (Adaugare pacienti)
+}
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml ESP32Seq
+
+database DB
+participant ESP32
+
+== Schimbare perioada esantionare ==
+DB -> ESP32: Perioada Esantionare Noua
+ESP32 -> ESP32: perioada_esantionare = perioada_esantionare_noua
+== Connect ==
+ESP32 -> DB: Incearca Conexiune
+alt Conexiune Stabilita
+    loop la perioada de esantionare
+        ESP32 -> ESP32: Citeste date senzori
+        note over DB
+            date_senzori = {puls, lumina, temperatura_camera, gaz_detectat, umiditate_detectata, proximitate_detectata}
+        end note
+        ESP32 -> ESP32: detectare alarma
+        opt alarma detectata
+            note over ESP32
+                alarma = {gaz, cresterea_temperaturii, parametrii_fiziologici_anormali, sistem_cazut}
+            end note
+            ESP32 -> DB: scrie alarma
+        end
+        ESP32 -> DB: scrie date_senzori
+    end
+else Conexiune Esuata
+    loop pentru 300s
+        ESP32 -> DB: Incearca Conexiune
+    end
+    opt timer expirat
+        ESP32 -> ESP32: Eroare la conectare
+    end
+end
+
+@enduml
