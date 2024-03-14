@@ -1,0 +1,21 @@
+@startuml stabilire_alarma
+
+database DB
+participant CloudServer
+participant WebApp
+
+WebApp -> WebApp: Citire scenariu nou alarma
+WebApp -> CloudServer: Cerere scriere scenariu nou alarma
+CloudServer -> DB: Scrie scenariu nou alarma
+
+alt alarma scrisa
+    DB --> CloudServer: Confirmare scenariu salvat
+    CloudServer --> WebApp: ok
+    WebApp -> WebApp: mesaj catre user
+else
+    DB --> CloudServer: Failed
+    CloudServer --> WebApp: nok
+    WebApp -> WebApp: mesaj catre user
+end
+
+@enduml

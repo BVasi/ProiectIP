@@ -1,16 +1,22 @@
 @startuml Stergere_Pacient
 
 database DB
+participant CloudServer
 participant WebApp
 
 WebApp -> WebApp: Citire cnp dupa care se cauta pacientul
-WebApp -> DB: cerere stergere pacient
+WebApp -> CloudServer: cerere stergere pacient
+CloudServer -> DB: stergere client
 
 alt Pacientul exista in baza de date
     DB -> DB: Sterge pacientul
-    DB --> WebApp: Confirmare stergere
+    DB --> CloudServer: Confirmare stergere
+    CloudServer --> WebApp: ok
+    WebApp -> WebApp: mesaj catre user
 else Pacientul nu exista in baza de date
-    DB --> WebApp: Informare ca pacientul nu exista
+    DB --> CloudServer: Informare ca pacientul nu exista
+    CloudServer --> WebApp: nok
+    WebApp -> WebApp: mesaj catre user
 end
 
 @enduml

@@ -14,7 +14,7 @@ rectangle "Aplicatie Mobila" {
     Pacient -left-> (Reset password)
     Pacient -left-> (Introducere valori citite)
     Pacient -left-> (Vizualizare fisa medicala)
-    Pacient -left-> (Programare)
+    Pacient -left-> (Chat)
     Pacient -left-> (Vizualizare grafice)
 
     Ingrijitor -right-> (Login)
@@ -22,7 +22,7 @@ rectangle "Aplicatie Mobila" {
     Ingrijitor -right-> (Vizualizare lista pacienti)
     Ingrijitor -right-> (Introducere valori citite)
     Ingrijitor -right-> (Vizualizare fisa medicala)
-    Ingrijitor -right-> (Programare)
+    Ingrijitor -right-> (Chat)
     Ingrijitor -right-> (Vizualizare grafice)
 
 }

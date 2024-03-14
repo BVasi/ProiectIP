@@ -1,0 +1,23 @@
+@startuml signup
+
+database DB
+participant CloudServer
+participant WebApp
+
+WebApp -> WebApp: citire date de inregistrare
+WebApp -> CloudServer: cerere creare cont
+CloudServer -> CloudServer: generare parola cont
+CloudServer -> DB: cerere adaugare cont
+DB -> DB: incercare adaugare cont
+
+alt operatie efectuata cu success
+    DB --> CloudServer: ok
+    CloudServer --> WebApp: cont creat cu succes (verificati emailul)
+    WebApp -> WebApp: mesaj catre user
+else operatie esuata
+    DB --> CloudServer: nok
+    CloudServer --> WebApp: eroare la crearea contului
+    WebApp -> WebApp: mesaj catre user
+end
+
+@enduml

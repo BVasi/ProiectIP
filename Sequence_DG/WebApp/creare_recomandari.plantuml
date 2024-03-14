@@ -1,0 +1,23 @@
+@startuml creare_recomandare
+
+database DB
+participant CloudServer
+participant WebApp
+participant MobileApp
+
+WebApp -> WebApp: Citire recomandare
+WebApp -> CloudServer: Cerere scriere recomandare
+CloudServer -> DB: Scrie recomandare
+
+alt alarma scrisa
+    DB --> CloudServer: Confirmare recomandare
+    CloudServer --> WebApp: ok
+    CloudServer -> MobileApp: push notification
+    WebApp -> WebApp: mesaj catre user-ul care a adaugat recomandarea
+else
+    DB --> CloudServer: Failed
+    CloudServer --> WebApp: nok
+    WebApp -> WebApp: mesaj catre user-ul care a adaugat recomandarea
+end
+
+@enduml
