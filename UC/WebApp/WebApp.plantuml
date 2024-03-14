@@ -1,4 +1,4 @@
-@startuml ESP32UCs
+@startuml WebAppUCs
 
 left to right direction
 
