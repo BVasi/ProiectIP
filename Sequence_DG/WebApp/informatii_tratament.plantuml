@@ -1,0 +1,23 @@
+@startuml informatii_tratament
+
+database DB
+participant CloudServer
+participant WebApp
+
+WebApp -> WebApp: citire informatii tratament
+WebApp -> CloudServer: cerere scriere tratament
+CloudServer -> DB: cerere scriere tratament
+DB -> DB: incercare adaugare tratament
+
+alt operatie efectuata cu success
+ DB -> CloudServer: ok
+       CloudServer -> WebApp: adaugare tratament
+       WebApp -> WebApp: mesaj catre user (tratamentul a fost creat)
+   else operatie esuata
+       DB -> CloudServer: nok
+       CloudServer -> WebApp: eroare adaugare tratament
+       WebApp -> WebApp: mesaj catre user (eroare)
+
+end
+
+@enduml

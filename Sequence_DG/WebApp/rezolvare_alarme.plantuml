@@ -1,0 +1,24 @@
+@startuml rezolvare_alarme
+
+database DB
+participant CloudServer
+participant WebApp
+participant MobileApp
+
+MobileApp -> MobileApp: Bifare alarma
+MobileApp -> CloudServer: Cerere rezolvare alarma
+CloudServer -> DB: Rezolvare alarma
+
+alt Alarma rezolvata
+    DB->CloudServer: Confirmare rezolvare alarma
+    CloudServer->WebApp: ok
+    CloudServer -> MobileApp: push notification
+    WebApp->WebApp: Alarma s-a rezolvat
+else
+    DB->CloudServer: Failed
+    CloudServer->WebApp: nok
+    CloudServer -> MobileApp: push notification
+    WebApp->WebApp: Mesaj alarma nu a fost rezolvata
+end
+
+@enduml

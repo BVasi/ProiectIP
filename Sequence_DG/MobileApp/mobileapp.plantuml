@@ -2,28 +2,38 @@
 
 database DB
 participant MobileApp
+participant CloudServer
 
 ==Login==
 MobileApp -> MobileApp: citire date {User:[username, parola]}
-MobileApp -> DB: trimitere {User:[username, parola]}
-DB -> DB: verificare date
-alt user gasit
-    DB --> MobileApp: login successfully
+MobileApp -> CloudServer: trimitere {User:[username, parola]}
+CloudServer -> DB: interogare cu datele contului
+alt Date Valide
+    DB --> CloudServer: ok
+    CloudServer --> MobileApp: login successfully
 else
-    DB --> MobileApp: login failed
+    DB --> CloudServer: nok
+    CloudServer --> MobileApp: login failed
 end
 ==Introducere date==
 MobileApp -> MobileApp:  citire date{tensiune arteriala,greutate,temperatura,glicemie}
 MobileApp -> MobileApp : verificare date
 opt parametrii_fiziologici_anormali
-    MobileApp -> DB: alarma
+    MobileApp -> CloudServer: alarma detectata
+    CloudServer -> DB: cerere scriere alarma
 end
-MobileApp -> DB: trimitere date introduse
+MobileApp -> CloudServer: date introduse
+CloudServer -> DB: cerere scriere date introduse
 ==Vizualizare fisa medicala==
-MobileApp -> DB: cerere fisa medicala
-DB --> MobileApp: trimitere informatii din fisa medicala
+MobileApp -> CloudServer: cerere fisa medicala
+CloudServer -> DB: interogare fisa medicala
+DB --> CloudServer: date fisa medicala
+CloudServer --> MobileApp: trimitere informatii fisa medicala
+MobileApp -> MobileApp: afisare fisa medicala
 ==Vizualizare lista pacienti==
-MobileApp -> DB: cerere lista pacienti
-DB --> MobileApp: trimitere lista pacienti
+MobileApp -> CloudServer: cerere lista pacienti
+CloudServer -> DB: interogare lista pacienti
+DB --> CloudServer: lista pacienti
+CloudServer --> MobileApp: lista pacienti
 
 @enduml
