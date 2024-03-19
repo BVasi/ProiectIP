@@ -18,7 +18,4 @@ else Pacientul nu exista in baza de date
     CloudServer --> WebApp: nok
     WebApp -> WebApp: mesaj catre user
 end
-note over WebApp
-    muie norby
-end note
 @enduml
