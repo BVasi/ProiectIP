@@ -1,0 +1,19 @@
+@startuml vizualizare_date_pacient
+
+database DB
+participant CloudServer
+participant WebApp
+
+WebApp -> CloudServer: cerere vizualizare grafice
+CloudServer -> DB: cerere vizualizare grafice
+alt exista date
+    DB -> CloudServer: trimite datele(ta, puls, temperatura, greutate, glicemie)
+    CloudServer -> WebApp: trimite datele
+    WebApp -> WebApp: creare si afisare grafice
+else nu exista date
+    DB -> CloudServer: nu exista date
+    CloudServer -> WebApp: nu exista date
+    WebApp -> WebApp: mesaj
+end
+
+@enduml
