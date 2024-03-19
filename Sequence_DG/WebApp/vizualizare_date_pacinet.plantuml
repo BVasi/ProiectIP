@@ -15,5 +15,7 @@ else nu exista date
     CloudServer -> WebApp: nu exista date
     WebApp -> WebApp: mesaj
 end
-
+note over WebApp
+    muie norby
+end note
 @enduml
