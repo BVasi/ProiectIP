@@ -1,24 +1,25 @@
-@startuml rezolvare_tratament
+@startuml Rezolvare_tratament
 
 database DB
 participant CloudServer
 participant WebApp
 participant MobileApp
+actor User
 
-MobileApp -> MobileApp: Bifare tratament
+User -> MobileApp: Bifare tratament
 MobileApp -> CloudServer: Cerere rezolvare tratament
 CloudServer -> DB: Rezolvare tratament
 
 alt Tratament rezolvat
     DB->CloudServer: Confirmare rezolvare tratament
-    CloudServer->WebApp: ok
+    CloudServer->WebApp: Succes
     CloudServer -> MobileApp: push notification
-    WebApp->WebApp: Tratamentul s-a rezolvat
-else
+    WebApp-> User: Tratamentul s-a rezolvat
+else Eroare
     DB->CloudServer: Failed
-    CloudServer->WebApp: nok
-    CloudServer -> MobileApp: push notification
-    WebApp->WebApp: Mesaj tratamentul nu a fost rezolvata
+    CloudServer->WebApp: Eroare
+    CloudServer -> MobileApp: Push notification
+    WebApp-> User: Mesaj tratamentul nu a fost rezolvata
 end
 
 @enduml

@@ -1,23 +1,23 @@
-@startuml informatii_tratament
+@startuml Informatii_tratament
 
 database DB
 participant CloudServer
 participant WebApp
 actor User
 
-User -> WebApp: introducere informatii tratament
-WebApp -> CloudServer: cerere scriere tratament
-CloudServer -> DB: cerere scriere tratament
-DB -> DB: incercare adaugare tratament
+User -> WebApp: Introducere informatii tratament
+WebApp -> CloudServer: Cerere scriere tratament
+CloudServer -> DB: Cerere scriere tratament
+DB -> DB: Incercare adaugare tratament
 
-alt operatie efectuata cu success
-    DB --> CloudServer: ok
-    CloudServer --> WebApp: adaugare tratament
-    WebApp --> User: ok
+alt Operatie efectuata cu success
+    DB --> CloudServer: Succes
+    CloudServer --> WebApp: Adaugare tratament
+    WebApp --> User: Mesaj
 else operatie esuata
-    DB --> CloudServer: nok
-    CloudServer --> WebApp: eroare adaugare tratament
-    WebApp --> User: nok
+    DB --> CloudServer: Eroare
+    CloudServer --> WebApp: Eroare adaugare tratament
+    WebApp --> User: Mesaj
 end
 
 @enduml

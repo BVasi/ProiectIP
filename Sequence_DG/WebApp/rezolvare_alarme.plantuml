@@ -11,11 +11,11 @@ CloudServer -> DB: Rezolvare alarma
 
 alt Alarma rezolvata
     DB --> CloudServer: Confirmare rezolvare alarma
-    CloudServer --> WebApp: ok
+    CloudServer --> WebApp: Succes
     WebApp --> User: Alarma s-a rezolvat
 else
     DB --> CloudServer: Failed
-    CloudServer --> WebApp: nok
+    CloudServer --> WebApp: Eroare
     WebApp --> User: Alarma NU s-a rezolvat
 end
 

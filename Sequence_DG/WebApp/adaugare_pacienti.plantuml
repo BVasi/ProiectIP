@@ -1,23 +1,23 @@
-@startuml adaugare_pacienti
+@startuml Adaugare_pacienti
 
 database DB
 participant CloudServer
 participant WebApp
 actor User
 
-User -> WebApp: introducere date cont
-WebApp -> CloudServer: cerere adaugare cont
-CloudServer -> DB: cerere adaugare cont
-DB -> DB: incercare adaugare cont
+User -> WebApp: Introducere date cont
+WebApp -> CloudServer: Cerere adaugare cont
+CloudServer -> DB: Cerere adaugare cont
+DB -> DB: Incercare adaugare cont
 
-alt operatie efectuata cu success
-    DB --> CloudServer: ok
-    CloudServer --> WebApp: cont creat cu succes (verificati emailul)
-    WebApp --> User: ok
-else operatie esuata
-    DB --> CloudServer: nok
-    CloudServer --> WebApp: eroare la crearea contului
-    WebApp --> User: nok
+alt Operatie efectuata cu success
+    DB --> CloudServer: Succes
+    CloudServer --> WebApp: Cont creat cu succes (verificati emailul)
+    WebApp --> User: Succes
+else Operatie esuata
+    DB --> CloudServer: Eroare
+    CloudServer --> WebApp: Eroare la crearea contului
+    WebApp --> User: Eroare
 end
 
 @enduml

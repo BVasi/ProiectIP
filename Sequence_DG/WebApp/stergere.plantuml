@@ -3,20 +3,21 @@
 database DB
 participant CloudServer
 participant WebApp
+actor User
 
-WebApp -> WebApp: Citire cnp dupa care se cauta pacientul
-WebApp -> CloudServer: cerere stergere pacient
-CloudServer -> DB: stergere client
+User -> WebApp: Citire cnp dupa care se cauta pacientul
+WebApp -> CloudServer: Cerere stergere pacient
+CloudServer -> DB: Stergere client
 
 alt Pacientul exista in baza de date
     DB -> DB: Sterge pacientul
     DB --> CloudServer: Confirmare stergere
-    CloudServer --> WebApp: ok
-    WebApp -> WebApp: mesaj catre user
+    CloudServer --> WebApp: Succes
+    WebApp -> User: Mesaj
 else Pacientul nu exista in baza de date
     DB --> CloudServer: Informare ca pacientul nu exista
-    CloudServer --> WebApp: nok
-    WebApp -> WebApp: mesaj catre user
+    CloudServer --> WebApp: Eroare
+    WebApp -> User: Mesaj
 end
 
 @enduml

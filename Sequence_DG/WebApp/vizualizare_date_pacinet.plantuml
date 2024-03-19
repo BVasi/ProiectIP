@@ -1,19 +1,22 @@
-@startuml vizualizare_date_pacient
+@startuml Vizualizare_date_pacient
 
 database DB
 participant CloudServer
 participant WebApp
+actor User
 
-WebApp -> CloudServer: cerere vizualizare grafice
-CloudServer -> DB: cerere vizualizare grafice
-alt exista date
-    DB -> CloudServer: trimite datele(ta, puls, temperatura, greutate, glicemie)
-    CloudServer -> WebApp: trimite datele
-    WebApp -> WebApp: creare si afisare grafice
-else nu exista date
-    DB -> CloudServer: nu exista date
-    CloudServer -> WebApp: nu exista date
-    WebApp -> WebApp: mesaj
+User -> WebApp: Cerere vizualizare grafice
+WebApp -> CloudServer: Cerere vizualizare grafice
+CloudServer -> DB: Cerere vizualizare grafice
+alt Exista date
+    DB -> CloudServer: Trimite datele(ta, puls, temperatura, greutate, glicemie)
+    CloudServer -> WebApp: Trimite datele
+    WebApp -> WebApp: Creare grafice
+    WebApp -> User: Afisare date
+else Nu exista date
+    DB -> CloudServer: Nu exista date
+    CloudServer -> WebApp: Nu exista date
+    WebApp -> User: Mesaj
 end
 
 @enduml

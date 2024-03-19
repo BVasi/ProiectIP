@@ -1,21 +1,22 @@
-@startuml stabilire_alarma
+@startuml Stabilire_alarma
 
 database DB
 participant CloudServer
 participant WebApp
+actor User
 
-WebApp -> WebApp: Citire scenariu nou alarma
+User -> WebApp: Introducere scenariu nou alarma
 WebApp -> CloudServer: Cerere scriere scenariu nou alarma
 CloudServer -> DB: Scrie scenariu nou alarma
 
-alt alarma scrisa
+alt Alarma scrisa
     DB --> CloudServer: Confirmare scenariu salvat
-    CloudServer --> WebApp: ok
-    WebApp -> WebApp: mesaj catre user
-else
+    CloudServer --> WebApp: Succes
+    WebApp -> User: Mesaj
+else Eroare
     DB --> CloudServer: Failed
-    CloudServer --> WebApp: nok
-    WebApp -> WebApp: mesaj catre user
+    CloudServer --> WebApp: Eroare
+    WebApp -> User: Mesaj
 end
 
 @enduml

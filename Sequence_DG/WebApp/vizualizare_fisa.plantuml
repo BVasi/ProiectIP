@@ -1,19 +1,22 @@
-@startuml vizualizare_fisa
+@startuml Vizualizare_fisa
 
 database DB
 participant CloudServer
 participant WebApp
+actor User
 
-WebApp -> CloudServer: cerere vizualizare fisa
-CloudServer -> DB: cerere vizualizare fisa
-alt exista date
-    DB -> CloudServer: trimitere datele
-    CloudServer -> WebApp: trimite datele
-    WebApp -> WebApp: creare si afisare fisa
-else nu exista date
-    DB -> CloudServer: nu exista date
-    CloudServer -> WebApp: nu exista date
-    WebApp -> WebApp: mesaj
+User -> WebApp: Cerere vizualizare fisa
+WebApp -> CloudServer: Cerere vizualizare fisa
+CloudServer -> DB: Cerere vizualizare fisa
+alt Exista date
+    DB -> CloudServer: Trimitere datele
+    CloudServer -> WebApp: Trimite datele
+    WebApp -> WebApp: Creare fisa
+    WebApp -> User: Afisare fisa
+else Nu exista date
+    DB -> CloudServer: Nu exista date
+    CloudServer -> WebApp: Nu exista date
+    WebApp -> User: Mesaj
 end
 
 @enduml

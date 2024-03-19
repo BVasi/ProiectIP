@@ -1,24 +1,24 @@
-@startuml creare_recomandare
+@startuml Creare_recomandare
 
 database DB
 participant CloudServer
-participant WebApp
 participant MobileApp
+participant WebApp
 Actor User
 
 User -> WebApp: Introducere recomandare
 WebApp -> CloudServer: Cerere scriere recomandare
 CloudServer -> DB: Scrie recomandare
 
-alt alarma scrisa
+alt Alarma scrisa
     DB --> CloudServer: Confirmare recomandare
-    CloudServer --> WebApp: ok
-    CloudServer -> MobileApp: push notification
-    WebApp --> User: ok
-else
+    CloudServer --> WebApp: Succes
+    CloudServer -> MobileApp: Push notification
+    WebApp --> User: Mesaj
+else Eroare
     DB --> CloudServer: Failed
-    CloudServer --> WebApp: nok
-    WebApp --> User: nok
+    CloudServer --> WebApp: Eroare
+    WebApp --> User: Mesaj
 end
 
 @enduml
