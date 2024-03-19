@@ -3,11 +3,13 @@
 participant WebApp
 participant CloudServer
 participant DB
+Actor User
 
+User -> WebApp: Introducere mesaj
 WebApp -> CloudServer: Cerere de trimitere mesaj
 CloudServer -> DB: Salvare mesaj în baza de date
 DB --> CloudServer: Confirmare salvare mesaj
 CloudServer --> WebApp: ok
-WebApp -> WebApp: Actualizare UI pentru mesaj trimis
+WebApp --> User: Actualizare UI pentru mesaj trimis
 
 @enduml

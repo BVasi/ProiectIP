@@ -3,8 +3,9 @@
 database DB
 participant CloudServer
 participant MobileApp
+actor User
 
-MobileApp -> MobileApp: citire date de inregistrare
+User -> MobileApp: scriere date de inregistrare
 MobileApp -> CloudServer: cerere creare cont
 CloudServer -> CloudServer: generare parola cont
 CloudServer -> DB: cerere adaugare cont
@@ -13,11 +14,12 @@ DB -> DB: incercare adaugare cont
 alt operatie efectuata cu success
     DB --> CloudServer: ok
     CloudServer --> MobileApp: cont creat cu succes (verificati emailul)
-    MobileApp -> MobileApp: mesaj catre user
+    MobileApp --> User: ok
 else operatie esuata
     DB --> CloudServer: nok
     CloudServer --> MobileApp: eroare la crearea contului
     MobileApp -> MobileApp: mesaj catre user
+    MobileApp --> User: nok
 end
 
 @enduml

@@ -4,8 +4,9 @@ database DB
 participant CloudServer
 participant WebApp
 participant MobileApp
+Actor User
 
-WebApp -> WebApp: Citire recomandare
+User -> WebApp: Introducere recomandare
 WebApp -> CloudServer: Cerere scriere recomandare
 CloudServer -> DB: Scrie recomandare
 
@@ -13,11 +14,11 @@ alt alarma scrisa
     DB --> CloudServer: Confirmare recomandare
     CloudServer --> WebApp: ok
     CloudServer -> MobileApp: push notification
-    WebApp -> WebApp: mesaj catre user-ul care a adaugat recomandarea
+    WebApp --> User: ok
 else
     DB --> CloudServer: Failed
     CloudServer --> WebApp: nok
-    WebApp -> WebApp: mesaj catre user-ul care a adaugat recomandarea
+    WebApp --> User: nok
 end
 
 @enduml

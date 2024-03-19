@@ -3,8 +3,9 @@
 database DB
 participant CloudServer
 participant WebApp
+actor User
 
-WebApp -> WebApp: citire date de adaugare
+User -> WebApp: introducere date cont
 WebApp -> CloudServer: cerere adaugare cont
 CloudServer -> DB: cerere adaugare cont
 DB -> DB: incercare adaugare cont
@@ -12,11 +13,11 @@ DB -> DB: incercare adaugare cont
 alt operatie efectuata cu success
     DB --> CloudServer: ok
     CloudServer --> WebApp: cont creat cu succes (verificati emailul)
-    WebApp -> WebApp: mesaj catre user
+    WebApp --> User: ok
 else operatie esuata
     DB --> CloudServer: nok
     CloudServer --> WebApp: eroare la crearea contului
-    WebApp -> WebApp: mesaj catre user
+    WebApp --> User: nok
 end
 
 @enduml

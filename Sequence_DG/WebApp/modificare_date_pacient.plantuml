@@ -1,20 +1,21 @@
 @startuml modificare_date_pacient
 
-   database DB
-   participant CloudServer
-   participant WebApp
+database DB
+participant CloudServer
+participant WebApp
+actor User
 
-   WebApp -> WebApp: introducere date modificate
-   WebApp -> CloudServer: cerere modificare date
-   CloudServer -> DB: cerere modificare date
-   DB -> DB: incercare modificare date
-   alt operatie efectuata cu succes
-       DB -> CloudServer: ok
-       CloudServer -> WebApp: date modificate cu succes
-       WebApp -> WebApp: mesaj catre user (datele au fost modificate)
-   else operatie esuata
-       DB -> CloudServer: nok
-       CloudServer -> WebApp: eroare modificare date
-       WebApp -> WebApp: mesaj catre user (eroare)
-   end
+User -> WebApp: introducere date modificate
+WebApp -> CloudServer: cerere modificare date
+CloudServer -> DB: cerere modificare date
+DB -> DB: incercare modificare date
+alt operatie efectuata cu succes
+    DB --> CloudServer: ok
+    CloudServer --> WebApp: date modificate cu succes
+    WebApp --> User: ok
+else operatie esuata
+    DB --> CloudServer: nok
+    CloudServer --> WebApp: eroare modificare date
+    WebApp --> User: nok
+end
 @enduml

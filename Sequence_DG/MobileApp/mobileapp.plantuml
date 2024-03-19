@@ -3,9 +3,10 @@
 database DB
 participant MobileApp
 participant CloudServer
+actor User
 
 ==Login==
-MobileApp -> MobileApp: citire date {User:[username, parola]}
+User -> MobileApp: introducere date login
 MobileApp -> CloudServer: trimitere {User:[username, parola]}
 CloudServer -> DB: interogare cu datele contului
 alt Date Valide
@@ -16,7 +17,7 @@ else
     CloudServer --> MobileApp: login failed
 end
 ==Introducere date==
-MobileApp -> MobileApp:  citire date{tensiune arteriala,greutate,temperatura,glicemie}
+User -> MobileApp:  introducere date{tensiune arteriala,greutate,temperatura,glicemie}
 MobileApp -> MobileApp : verificare date
 opt parametrii_fiziologici_anormali
     MobileApp -> CloudServer: alarma detectata
@@ -24,16 +25,34 @@ opt parametrii_fiziologici_anormali
 end
 MobileApp -> CloudServer: date introduse
 CloudServer -> DB: cerere scriere date introduse
+DB --> CloudServer: date scrise ok
+CloudServer --> MobileApp: ok
 ==Vizualizare fisa medicala==
+User -> MobileApp: cerere vizualizare fisa
 MobileApp -> CloudServer: cerere fisa medicala
 CloudServer -> DB: interogare fisa medicala
 DB --> CloudServer: date fisa medicala
 CloudServer --> MobileApp: trimitere informatii fisa medicala
-MobileApp -> MobileApp: afisare fisa medicala
+MobileApp -> User: afisare fisa medicala
 ==Vizualizare lista pacienti==
+User -> MobileApp: cerere lista pacienti
 MobileApp -> CloudServer: cerere lista pacienti
 CloudServer -> DB: interogare lista pacienti
 DB --> CloudServer: lista pacienti
 CloudServer --> MobileApp: lista pacienti
+MobileApp --> User: lista pacienti
+==Reset Password==
+User -> MobileApp: scriere date reset password {[parola_veche, parola_noua, confirmare_parola_noua]}
+MobileApp -> CloudServer: cerere reset password
+CloudServer -> DB: interogare parola_DB == parola_veche
+alt Date Valide
+    CloudServer -> DB: update parola noua
+    DB --> CloudServer: update ok
+    CloudServer --> MobileApp: ok
+    MobileApp -> MobileApp: parola actualizata
+else Date Invalide
+    CloudServer --> MobileApp: nok
+    MobileApp -> MobileApp: eroare la schimbarea parolei
+end
 
 @enduml
