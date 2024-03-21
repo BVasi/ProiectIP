@@ -1,0 +1,17 @@
+@startuml
+skinparam classAttributeIconSize 0
+class Inregistrare_senzori{
+ -DateTime data 
+ -Integer tensiune_arteriala
+ -Integer Puls
+ -Float temperatura
+ -Float greutate
+ -Integer glicemie
+ -Boolean lumina
+ -Integer temperatura_ambientala
+ -Boolean prezenta_gaz
+ -Boolean umiditate
+ -Boolean proximitate
+}
+
+@enduml
