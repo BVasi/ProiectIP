@@ -1,0 +1,19 @@
+@startuml
+skinparam classAttributeIconSize 0
+class User {
+ -nume 
+ -prenume
+ -CNP
+ -varsta
+ -strada
+ -oras 
+ -judet
+ -tara
+ -numar_telefon
+ -adresa_email
+ -profesie
+ -loc de munca
+ -parola
+ -tip_acces
+}
+@endum
