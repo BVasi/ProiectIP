@@ -1,0 +1,13 @@
+@startuml
+class Alarme{
+  boolean e_rezolvata
+  enum Tip_alarma
+}
+
+enum Tip_alarma {
+  Gaz
+  Cresterea_temperaturii
+  Paramaterii_fiziologici_anormali
+  Sistem_cazut
+}
+@enduml
